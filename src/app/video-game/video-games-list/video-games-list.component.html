@@ -1,1 +1,12 @@
-<p>video-games-list works!</p>
+<ul class="list-group navbar-bottom">
+  <li class="list-group-item" *ngFor="let videoGame of videoGames; let i = index;">
+    <div class="col">
+      <img src="{{ videoGame.backgroundImage }}" alt="" class="img-fluid">
+    </div>
+    <div class="col">
+      {{ videoGame.name }}
+    </div>
+
+
+  </li>
+</ul>

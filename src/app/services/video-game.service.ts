@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { VideoGame } from '../models/VideoGame';
 import { Genre } from '../models/Genre';
 import { Subject } from 'rxjs';
-import {Platform} from '../models/Platform';
+import { Platform } from '../models/Platform';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +13,8 @@ export class VideoGameService {
   private videoGames: VideoGame[] = [];
   private videoGame: VideoGame;
   public videoGamesSubject = new Subject<VideoGame[]>();
+  public nextUri: string;
+  public previousUri: string;
 
   constructor(private httpClient: HttpClient) { }
 
@@ -22,11 +24,12 @@ export class VideoGameService {
 
   getVideoGames() {
     this.httpClient
-      .get<any>('https://api.rawg.io/api/games?page=1')
+      .get<any>('https://api.rawg.io/api/games')
       .subscribe(
         (response) => {
+          this.setNextUri(response.nextUri);
+          this.setPreviousUri(response.previousUri);
           this.setVideoGames(response.results);
-          this.emitVideoGames();
         },
         (error) => {
           console.log('Erreur : ' + error);
@@ -38,7 +41,6 @@ export class VideoGameService {
     videoGames.forEach((videoGame) => {
       this.setSingleVideoGame(videoGame);
     });
-    console.log(this.videoGames);
   }
 
   setSingleVideoGame(videoGame): void {
@@ -98,5 +100,13 @@ export class VideoGameService {
     });
 
     return imagesForOneGame;
+  }
+
+  setNextUri(nextUri: string) {
+    this.nextUri = nextUri;
+  }
+
+  setPreviousUri(previousUri: string) {
+    this.previousUri = previousUri;
   }
 }

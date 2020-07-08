@@ -1,7 +1,11 @@
 .navbar-bottom {
-  margin-top: 70px;
+  margin-top: 56px;
 }
 
 .img-card {
   height: 150px;
+}
+
+.text-red {
+  color: #ff4444 !important;
 }

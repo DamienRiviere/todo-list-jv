@@ -1,35 +1,29 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { VideoGame } from '../models/VideoGame';
-import { Genre } from '../models/Genre';
 import { Subject } from 'rxjs';
-import { Platform } from '../models/Platform';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VideoGameService {
 
-  private videoGames: VideoGame[] = [];
-  private videoGame: VideoGame;
-  public videoGamesSubject = new Subject<VideoGame[]>();
-  public nextUri: string;
-  public previousUri: string;
+  private videoGames = [];
+  public videoGamesSubject = new Subject<any[]>();
+
+  private singleVideoGame = {};
+  public singleVideoGameSubject = new Subject<any>();
+
+  public urlApi = 'https://api.rawg.io/api/games';
 
   constructor(private httpClient: HttpClient) { }
 
-  emitVideoGames() {
-    this.videoGamesSubject.next(this.videoGames);
-  }
-
-  getVideoGames() {
+  getVideoGames(): void {
     this.httpClient
-      .get<any>('https://api.rawg.io/api/games')
+      .get<any>(this.urlApi)
       .subscribe(
         (response) => {
-          this.setNextUri(response.nextUri);
-          this.setPreviousUri(response.previousUri);
-          this.setVideoGames(response.results);
+          this.videoGames = response.results;
+          this.emitVideoGames();
         },
         (error) => {
           console.log('Erreur : ' + error);
@@ -37,76 +31,25 @@ export class VideoGameService {
       );
   }
 
-  setVideoGames(videoGames: any) {
-    videoGames.forEach((videoGame) => {
-      this.setSingleVideoGame(videoGame);
-    });
-  }
-
-  setSingleVideoGame(videoGame): void {
-    const genres = this.setGenres(videoGame.genres);
-    const platforms = this.setPlatforms(videoGame.platforms);
-    const images = this.setImages(videoGame.short_screenshots);
-
-    this.videoGame = new VideoGame(
-      videoGame.name,
-      videoGame.slug,
-      videoGame.released,
-      videoGame.background_image,
-      images,
-      videoGame.rating,
-      videoGame.metacritic,
-      platforms,
-      genres
-    );
-
-    this.videoGames.push(this.videoGame);
-  }
-
-  setGenres(genres: any[]): any[] {
-    const genresForOneGame = [];
-
-    genres.forEach((genre) => {
-      const singleGenre = new Genre(
-        genre.name,
-        genre.slug
+  getSingleVideoGame(slug: string): void {
+    this.httpClient
+      .get<any>(this.urlApi + '/' + slug)
+      .subscribe(
+        (response) => {
+          this.singleVideoGame = response;
+          this.emitSingleVideoGame();
+        },
+        (error) => {
+          console.log('Erreur : ' + error);
+        }
       );
-
-      genresForOneGame.push(singleGenre);
-    });
-
-    return genresForOneGame;
   }
 
-  setPlatforms(platforms: any[]): any[] {
-    const platformsForOneGame = [];
-
-    platforms.forEach((platform) => {
-      const singlePlatform = new Platform(
-        platform.platform.name,
-        platform.platform.slug
-      );
-      platformsForOneGame.push(singlePlatform);
-    });
-
-    return platformsForOneGame;
+  emitVideoGames() {
+    this.videoGamesSubject.next(this.videoGames);
   }
 
-  setImages(images: any[]): any[] {
-    const imagesForOneGame = [];
-
-    images.forEach((image) => {
-      imagesForOneGame.push(image.image);
-    });
-
-    return imagesForOneGame;
-  }
-
-  setNextUri(nextUri: string) {
-    this.nextUri = nextUri;
-  }
-
-  setPreviousUri(previousUri: string) {
-    this.previousUri = previousUri;
+  emitSingleVideoGame() {
+    this.singleVideoGameSubject.next(this.singleVideoGame);
   }
 }

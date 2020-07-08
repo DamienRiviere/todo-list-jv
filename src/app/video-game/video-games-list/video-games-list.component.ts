@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { VideoGameService } from '../../services/video-game.service';
 import { Router } from '@angular/router';
-import { VideoGame } from '../../models/VideoGame';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -11,14 +10,14 @@ import { Subscription } from 'rxjs';
 })
 export class VideoGamesListComponent implements OnInit, OnDestroy {
 
-  public videoGames: VideoGame[];
+  public videoGames: any[];
   public videoGamesSubscription: Subscription;
 
   constructor(private videoGameService: VideoGameService, private router: Router) { }
 
   ngOnInit(): void {
     this.videoGamesSubscription = this.videoGameService.videoGamesSubject.subscribe(
-      (videoGames: VideoGame[]) => {
+      (videoGames: any[]) => {
         this.videoGames = videoGames;
       }
     );
@@ -28,6 +27,10 @@ export class VideoGamesListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.videoGamesSubscription.unsubscribe();
+  }
+
+  onSingleVideoGame(slug: string) {
+    this.router.navigate(['video-games', slug]);
   }
 
 }

@@ -1,1 +1,29 @@
-<p>video-games-list works!</p>
+<div class="container-fluid bg-light navbar-bottom py-4">
+  <h2 class="text-center mb-0">
+    Liste des jeux
+  </h2>
+  <h6 class="text-muted text-center">
+    Retrouvez tous les jeux vidéo de l'histoire !
+  </h6>
+</div>
+
+<div class="container">
+  <div class="row mt-4">
+    <div class="col-lg-3" *ngFor="let videoGame of videoGames; let i = index;">
+      <div class="card-group mb-3">
+        <div class="card" style="width: 18rem;">
+          <img src="{{ videoGame.background_image }}" class="card-img-top img-card" alt="Image de {{ videoGame.name }}">
+          <div class="card-body pl-2 pr-2 text-center">
+            <h6 class="card-title font-weight-bold mb-0">
+              <a (click)="onSingleVideoGame(videoGame.slug)" style="cursor: pointer;" class="text-red">
+                {{ videoGame.name }}
+              </a>
+            </h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

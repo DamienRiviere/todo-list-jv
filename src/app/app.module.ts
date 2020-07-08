@@ -7,6 +7,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { VideoGamesListComponent } from './video-game/video-games-list/video-games-list.component';
 import { SingleVideoGameComponent } from './video-game/single-video-game/single-video-game.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { SingleVideoGameComponent } from './video-game/single-video-game/single-
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule
   ],
   providers: [],

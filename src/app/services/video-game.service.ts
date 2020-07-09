@@ -22,7 +22,26 @@ export class VideoGameService {
       .get<any>(this.urlApi)
       .subscribe(
         (response) => {
-          this.videoGames = response.results;
+          this.videoGames = response;
+          this.emitVideoGames();
+        },
+        (error) => {
+          console.log('Erreur : ' + error);
+        }
+      );
+  }
+
+  getNextPage(url: string): void {
+    this.httpClient
+      .get<any>(url)
+      .subscribe(
+        (response) => {
+          response.results.forEach((result) => {
+            // @ts-ignore
+            this.videoGames.results.push(result);
+          });
+          // @ts-ignore
+          this.videoGames.next = response.next;
           this.emitVideoGames();
         },
         (error) => {

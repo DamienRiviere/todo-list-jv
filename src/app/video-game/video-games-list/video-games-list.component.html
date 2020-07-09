@@ -24,6 +24,12 @@
       </div>
     </div>
   </div>
+
+  <div class="text-center py-4">
+    <button class="btn btn-danger" (click)="onNextPage(next)" *ngIf="getCurrentPage() < getPages()">
+      Afficher plus de jeux
+    </button>
+  </div>
 </div>
 
 

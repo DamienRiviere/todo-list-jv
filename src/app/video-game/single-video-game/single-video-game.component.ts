@@ -18,14 +18,13 @@ export class SingleVideoGameComponent implements OnInit, OnDestroy {
   constructor(private videoGameService: VideoGameService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.slug = this.route.snapshot.params['slug'];
+    this.slug = this.route.snapshot.params.slug;
     this.singleVideoGameSubscription = this.videoGameService.singleVideoGameSubject.subscribe(
       (singleVideoGame: any) => {
         this.singleVideoGame = singleVideoGame;
       }
     );
     this.videoGameService.getSingleVideoGame(this.slug);
-    this.videoGameService.emitSingleVideoGame();
   }
 
   ngOnDestroy(): void {

@@ -42,7 +42,10 @@ export class VideoGamesListComponent implements OnInit, OnDestroy {
   }
 
   getCurrentPage() {
-    return Number(this.next?.substr(35));
+    const currentPage = this.next.split('?page=');
+    const regex = /\d+/g;
+
+    return Number(currentPage[1].match(regex)[0]);
   }
 
   getPages() {

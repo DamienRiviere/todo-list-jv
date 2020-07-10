@@ -1,4 +1,4 @@
-<div class="container-fluid bg-light navbar-bottom py-4">
+<div class="container-fluid bg-light navbar-bottom py-4" *ngIf="singleVideoGame">
   <h2 class="text-center mb-0">
     {{ singleVideoGame.name }}
   </h2>
@@ -7,7 +7,7 @@
   </h6>
 </div>
 
-<div class="container">
+<div class="container" *ngIf="singleVideoGame">
   <div class="row mt-4">
     <div class="col-8 border-right">
       <img src="{{ singleVideoGame.background_image }}" alt="" class="img-fluid">
@@ -63,3 +63,4 @@
   </div>
 </div>
 
+<app-loader *ngIf="!singleVideoGame"></app-loader>

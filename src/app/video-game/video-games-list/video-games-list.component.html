@@ -8,6 +8,14 @@
 </div>
 
 <div class="container">
+  <div class="row">
+    <div class="col-12 bg-light py-4 rounded mt-4 border">
+      <app-search-video-game></app-search-video-game>
+    </div>
+  </div>
+</div>
+
+<div class="container mb-5" *ngIf="videoGames">
   <div class="row mt-4">
     <div class="col-lg-3" *ngFor="let videoGame of videoGames; let i = index;">
       <div class="card-group mb-3">
@@ -31,5 +39,7 @@
     </button>
   </div>
 </div>
+
+<app-loader *ngIf="!videoGames"></app-loader>
 
 

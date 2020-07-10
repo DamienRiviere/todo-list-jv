@@ -1,0 +1,7 @@
+<form [formGroup]="searchForm" (ngSubmit)="onSubmitForm()">
+    <div class="form-group">
+      <label for="name" class="mr-3">Nom du jeu</label>
+      <input type="text" id="name" class="form-control mr-3" formControlName="name" placeholder="Entrez le nom du jeu que vous recherchez ...">
+    </div>
+    <button type="submit" class="btn btn-primary">Rechercher</button>
+</form>

@@ -26,7 +26,7 @@ export class VideoGameService {
           this.emitVideoGames();
         },
         (error) => {
-          console.log('Erreur : ' + error);
+          console.log(`Erreur : ${error}`);
         }
       );
   }
@@ -45,30 +45,50 @@ export class VideoGameService {
           this.emitVideoGames();
         },
         (error) => {
-          console.log('Erreur : ' + error);
+          console.log(`Erreur : ${error}`);
         }
       );
   }
 
   getSingleVideoGame(slug: string): void {
     this.httpClient
-      .get<any>(this.urlApi + '/' + slug)
+      .get<any>(`${this.urlApi}/${slug}`)
       .subscribe(
         (response) => {
           this.singleVideoGame = response;
           this.emitSingleVideoGame();
         },
         (error) => {
-          console.log('Erreur : ' + error);
+          console.log(`Erreur : ${error}`);
         }
       );
   }
 
-  emitVideoGames() {
+  searchVideoGame(term: string): void {
+    term.trim().replace(/ /g, '-').toLowerCase();
+
+    this.httpClient
+      .get<any>(`${this.urlApi}?search=${term}`)
+      .subscribe(
+        (response) => {
+          this.videoGames = response;
+          // @ts-ignore
+          this.videoGames.count = response.count;
+          // @ts-ignore
+          this.videoGames.next = response.next;
+          this.emitVideoGames();
+        },
+        (error) => {
+          console.log(`Erreur : ${error}`);
+        }
+      );
+  }
+
+  emitVideoGames(): void {
     this.videoGamesSubject.next(this.videoGames);
   }
 
-  emitSingleVideoGame() {
+  emitSingleVideoGame(): void {
     this.singleVideoGameSubject.next(this.singleVideoGame);
   }
 }

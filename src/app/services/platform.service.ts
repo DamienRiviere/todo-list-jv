@@ -31,9 +31,9 @@ export class PlatformService {
       );
   }
 
-  getSinglePlatform(id: number): void {
+  getSinglePlatform(slug: string): void {
     this.httpClient
-      .get<any>(`${this.urlApi}/${id}`)
+      .get<any>(`${this.urlApi}/${slug}`)
       .subscribe(
         (response) => {
           this.singlePlatform = response;

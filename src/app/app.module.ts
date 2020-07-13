@@ -14,6 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { PlatformsListComponent } from './platform/platforms-list/platforms-list.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { SinglePlatformComponent } from './platform/single-platform/single-platform.component';
+import { DevelopersListComponent } from './developer/developers-list/developers-list.component';
 
 @NgModule({
     declarations: [
@@ -26,7 +27,8 @@ import { SinglePlatformComponent } from './platform/single-platform/single-platf
         SearchVideoGameComponent,
         PlatformsListComponent,
         PaginationComponent,
-        SinglePlatformComponent
+        SinglePlatformComponent,
+        DevelopersListComponent
     ],
   imports: [
     BrowserModule,

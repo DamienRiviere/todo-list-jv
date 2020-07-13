@@ -15,6 +15,7 @@ export class VideoGamesListComponent implements OnInit, OnDestroy {
 
   public count: number;
   public next: string;
+  public paginationName = 'jeux';
 
   constructor(private videoGameService: VideoGameService, private router: Router) { }
 

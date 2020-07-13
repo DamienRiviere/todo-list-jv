@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class SinglePlatformComponent implements OnInit, OnDestroy {
 
-  public id: number;
+  public slug: string;
 
   public singlePlatform: any;
   public singlePlatformSubscription: Subscription;
@@ -18,13 +18,13 @@ export class SinglePlatformComponent implements OnInit, OnDestroy {
   constructor(private platformService: PlatformService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.params.id;
+    this.slug = this.route.snapshot.params.slug;
     this.singlePlatformSubscription = this.platformService.singlePlatformSubject.subscribe(
       (singlePlatform: any) => {
         this.singlePlatform = singlePlatform;
       }
     );
-    this.platformService.getSinglePlatform(this.id);
+    this.platformService.getSinglePlatform(this.slug);
   }
 
   ngOnDestroy(): void {

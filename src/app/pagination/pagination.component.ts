@@ -10,6 +10,7 @@ export class PaginationComponent implements OnInit {
 
   @Input() public next: string;
   @Input() public count: number;
+  @Input() public paginationName: string;
 
   constructor(private videoGameService: VideoGameService) { }
 

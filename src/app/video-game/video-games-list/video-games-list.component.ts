@@ -33,29 +33,7 @@ export class VideoGamesListComponent implements OnInit, OnDestroy {
     this.videoGamesSubscription.unsubscribe();
   }
 
-  onNextPage(next: string) {
-    this.videoGameService.getNextPage(next);
-  }
-
   onSingleVideoGame(slug: string) {
     this.router.navigate(['video-games', slug]);
   }
-
-  getCurrentPage() {
-    const currentPage = this.next.split('?page=');
-    const regex = /\d+/g;
-
-    return Number(currentPage[1].match(regex)[0]);
-  }
-
-  getPages() {
-    let pages = Math.ceil(this.count / 20);
-
-    if (pages <= 0) {
-      return pages += 1;
-    }
-
-    return pages;
-  }
-
 }

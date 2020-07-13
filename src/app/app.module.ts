@@ -13,6 +13,7 @@ import { SearchVideoGameComponent } from './video-game/search-video-game/search-
 import { ReactiveFormsModule } from '@angular/forms';
 import { PlatformsListComponent } from './platform/platforms-list/platforms-list.component';
 import { PaginationComponent } from './pagination/pagination.component';
+import { SinglePlatformComponent } from './platform/single-platform/single-platform.component';
 
 @NgModule({
     declarations: [
@@ -24,7 +25,8 @@ import { PaginationComponent } from './pagination/pagination.component';
         LoaderComponent,
         SearchVideoGameComponent,
         PlatformsListComponent,
-        PaginationComponent
+        PaginationComponent,
+        SinglePlatformComponent
     ],
   imports: [
     BrowserModule,

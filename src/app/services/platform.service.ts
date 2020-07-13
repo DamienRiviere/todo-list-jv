@@ -10,6 +10,9 @@ export class PlatformService {
   private platforms = [];
   public platformsSubject = new Subject<any[]>();
 
+  private singlePlatform = {};
+  public singlePlatformSubject = new Subject<any>();
+
   public urlApi = 'https://api.rawg.io/api/platforms';
 
   constructor(private httpClient: HttpClient) { }
@@ -28,7 +31,25 @@ export class PlatformService {
       );
   }
 
+  getSinglePlatform(id: number): void {
+    this.httpClient
+      .get<any>(`${this.urlApi}/${id}`)
+      .subscribe(
+        (response) => {
+          this.singlePlatform = response;
+          this.emitSinglePlatform();
+        },
+        (error) => {
+          console.log(`Erreur : ${error}`);
+        }
+      )
+  }
+
   emitPlatforms(): void {
     this.platformsSubject.next(this.platforms);
+  }
+
+  emitSinglePlatform(): void {
+    this.singlePlatformSubject.next(this.singlePlatform);
   }
 }

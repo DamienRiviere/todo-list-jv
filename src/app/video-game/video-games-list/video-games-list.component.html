@@ -34,9 +34,7 @@
   </div>
 
   <div class="text-center py-4">
-    <button class="btn btn-danger" (click)="onNextPage(next)" *ngIf="getCurrentPage() < getPages()">
-      Afficher plus de jeux
-    </button>
+    <app-pagination [count]="count" [next]="next"></app-pagination>
   </div>
 </div>
 

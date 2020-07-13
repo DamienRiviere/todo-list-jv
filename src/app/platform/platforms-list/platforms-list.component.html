@@ -1,0 +1,28 @@
+<div class="container-fluid bg-light navbar-bottom py-4">
+  <h2 class="text-center mb-0">
+    Liste des plateformes
+  </h2>
+  <h6 class="text-muted text-center">
+    Retrouvez toutes les plateformes l'histoire !
+  </h6>
+</div>
+
+<div class="container mb-5" *ngIf="platforms">
+  <div class="row mt-4">
+    <div class="col-lg-3" *ngFor="let platform of platforms; let i = index;">
+      <div class="card-group mb-3">
+        <div class="card" style="width: 18rem;">
+          <img src="{{ platform.image_background }}" class="card-img-top img-card" alt="Image de {{ platform.name }}">
+          <div class="card-body pl-2 pr-2 text-center">
+            <h6 class="card-title font-weight-bold mb-0">
+              <a style="cursor: pointer;" class="text-red" (click)="onSinglePlatform(platform.id)">
+                {{ platform.name }}
+              </a>
+            </h6>
+            <p class="mb-0">Nombre de jeux : <span class="font-weight-bold">{{ platform.games_count }}</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

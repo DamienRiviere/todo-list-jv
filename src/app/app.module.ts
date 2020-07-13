@@ -10,7 +10,9 @@ import { SingleVideoGameComponent } from './video-game/single-video-game/single-
 import { HttpClientModule } from '@angular/common/http';
 import { LoaderComponent } from './loader/loader.component';
 import { SearchVideoGameComponent } from './video-game/search-video-game/search-video-game.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { PlatformsListComponent } from './platform/platforms-list/platforms-list.component';
+import { PaginationComponent } from './pagination/pagination.component';
 
 @NgModule({
     declarations: [
@@ -20,7 +22,9 @@ import {ReactiveFormsModule} from '@angular/forms';
         VideoGamesListComponent,
         SingleVideoGameComponent,
         LoaderComponent,
-        SearchVideoGameComponent
+        SearchVideoGameComponent,
+        PlatformsListComponent,
+        PaginationComponent
     ],
   imports: [
     BrowserModule,

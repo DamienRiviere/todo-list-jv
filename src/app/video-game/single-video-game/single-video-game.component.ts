@@ -18,7 +18,7 @@ export class SingleVideoGameComponent implements OnInit, OnDestroy {
   constructor(private videoGameService: VideoGameService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.slug = this.route.snapshot.params.slug;
+    this.getSlug();
     this.singleVideoGameSubscription = this.videoGameService.singleVideoGameSubject.subscribe(
       (singleVideoGame: any) => {
         this.singleVideoGame = singleVideoGame;
@@ -29,6 +29,14 @@ export class SingleVideoGameComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.singleVideoGameSubscription.unsubscribe();
+  }
+
+  getSlug(): void {
+    if (typeof this.route.snapshot.params.videogame !== 'undefined') {
+      this.slug = this.route.snapshot.params.videogame;
+    } else {
+      this.slug = this.route.snapshot.params.slug;
+    }
   }
 
 }

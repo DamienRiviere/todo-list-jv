@@ -13,13 +13,13 @@ export class VideoGameService {
   private singleVideoGame = {};
   public singleVideoGameSubject = new Subject<any>();
 
-  public urlApi = 'https://api.rawg.io/api/games';
+  public baseUrl = 'https://api.rawg.io/api/games';
 
   constructor(private httpClient: HttpClient) { }
 
   getVideoGames(): void {
     this.httpClient
-      .get<any>(this.urlApi)
+      .get<any>(this.baseUrl)
       .subscribe(
         (response) => {
           this.videoGames = response;
@@ -52,7 +52,7 @@ export class VideoGameService {
 
   getSingleVideoGame(slug: string): void {
     this.httpClient
-      .get<any>(`${this.urlApi}/${slug}`)
+      .get<any>(`${this.baseUrl}/${slug}`)
       .subscribe(
         (response) => {
           this.singleVideoGame = response;
@@ -64,11 +64,9 @@ export class VideoGameService {
       );
   }
 
-  searchVideoGame(term: string): void {
-    term.trim().replace(/ /g, '-').toLowerCase();
-
+  getVideoGamesByDeveloper(developer: string): void {
     this.httpClient
-      .get<any>(`${this.urlApi}?search=${term}`)
+      .get<any>(`${this.baseUrl}?developers=${developer}`)
       .subscribe(
         (response) => {
           this.videoGames = response;
@@ -82,6 +80,42 @@ export class VideoGameService {
           console.log(`Erreur : ${error}`);
         }
       );
+  }
+
+  searchVideoGame(term: string, params: []): void {
+    term.trim().replace(/ /g, '-').toLowerCase();
+    const url = this.getUrlForSearch(params);
+
+    this.httpClient
+      .get<any>(`${url}${term}`)
+      .subscribe(
+        (response) => {
+          this.videoGames = response;
+          // @ts-ignore
+          this.videoGames.count = response.count;
+          // @ts-ignore
+          this.videoGames.next = response.next;
+          this.emitVideoGames();
+        },
+        (error) => {
+          console.log(`Erreur : ${error}`);
+        }
+      );
+  }
+
+  getUrlForSearch(params: []): string {
+    let url = '';
+
+    // @ts-ignore
+    switch (params[0]) {
+      case 'video-games':
+        return url = `${this.baseUrl}?search=`;
+        break;
+      case 'developers':
+        // @ts-ignore
+        return url = `${this.baseUrl}?developers=${params[1]}&search=`;
+        break;
+    }
   }
 
   emitVideoGames(): void {

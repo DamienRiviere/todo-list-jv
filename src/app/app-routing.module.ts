@@ -5,6 +5,7 @@ import { SingleVideoGameComponent } from './video-game/single-video-game/single-
 import { PlatformsListComponent } from './platform/platforms-list/platforms-list.component';
 import { SinglePlatformComponent } from './platform/single-platform/single-platform.component';
 import { DevelopersListComponent } from './developer/developers-list/developers-list.component';
+import { SingleDeveloperComponent } from './developer/single-developer/single-developer.component';
 
 
 const routes: Routes = [
@@ -13,6 +14,8 @@ const routes: Routes = [
   { path: 'platforms', component: PlatformsListComponent },
   { path: 'platforms/:slug', component: SinglePlatformComponent },
   { path: 'developers', component: DevelopersListComponent },
+  { path: 'developers/:slug', component: SingleDeveloperComponent },
+  { path: 'developers/:slug/:videogame', component: SingleVideoGameComponent },
   { path: '', redirectTo: 'video-games', pathMatch: 'full' }
 ];
 

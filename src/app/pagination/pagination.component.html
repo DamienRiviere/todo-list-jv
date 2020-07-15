@@ -1,3 +1,3 @@
-<button class="btn btn-danger" (click)="onNextPage(next)" *ngIf="getCurrentPage() < getPages()">
+<button class="btn btn-danger" (click)="onNextPage(next)" *ngIf="next != null">
   Afficher plus de {{ paginationName }}
 </button>

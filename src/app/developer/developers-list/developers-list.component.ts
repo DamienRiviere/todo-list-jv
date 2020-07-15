@@ -35,7 +35,7 @@ export class DevelopersListComponent implements OnInit, OnDestroy {
   }
 
   onSingleDeveloper(slug: string): void {
-
+    this.router.navigate(['developers', slug]);
   }
 
 }

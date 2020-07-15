@@ -14,7 +14,7 @@ export class DevelopersListComponent implements OnInit, OnDestroy {
   public developersSubscription: Subscription;
 
   public count: number;
-  public next: number;
+  public next: string;
   public paginationName = 'développeurs';
 
   constructor(private developerService: DeveloperService, private router: Router) { }

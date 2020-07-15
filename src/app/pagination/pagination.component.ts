@@ -1,5 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {VideoGameService} from '../services/video-game.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { VideoGameService } from '../services/video-game.service';
+import { DeveloperService } from '../services/developer.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-pagination',
@@ -13,12 +15,26 @@ export class PaginationComponent implements OnInit {
   @Input() public count: number;
   @Input() public paginationName: string;
 
-  constructor(private videoGameService: VideoGameService) { }
+  constructor(
+    private videoGameService: VideoGameService,
+    private developerService: DeveloperService,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
   }
 
   onNextPage(next: string) {
-    this.videoGameService.getNextPage(next);
+    // @ts-ignore
+    switch (this.route.url.value[0].path) {
+      case 'video-games':
+        this.videoGameService.getNextPage(next);
+        break;
+      case 'developers':
+        this.developerService.getNextPage(next);
+        break;
+    }
   }
+
+
 }

@@ -9,6 +9,7 @@ import {VideoGameService} from '../services/video-game.service';
 export class PaginationComponent implements OnInit {
 
   @Input() public next: string;
+  @Input() public previous: string;
   @Input() public count: number;
   @Input() public paginationName: string;
 
@@ -20,22 +21,4 @@ export class PaginationComponent implements OnInit {
   onNextPage(next: string) {
     this.videoGameService.getNextPage(next);
   }
-
-  getCurrentPage() {
-    const currentPage = this.next.split('?page=');
-    const regex = /\d+/g;
-
-    return Number(currentPage[1].match(regex)[0]);
-  }
-
-  getPages() {
-    let pages = Math.ceil(this.count / 20);
-
-    if (pages <= 0) {
-      return pages += 1;
-    }
-
-    return pages;
-  }
-
 }

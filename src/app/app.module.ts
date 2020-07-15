@@ -15,6 +15,7 @@ import { PlatformsListComponent } from './platform/platforms-list/platforms-list
 import { PaginationComponent } from './pagination/pagination.component';
 import { SinglePlatformComponent } from './platform/single-platform/single-platform.component';
 import { DevelopersListComponent } from './developer/developers-list/developers-list.component';
+import { SingleDeveloperComponent } from './developer/single-developer/single-developer.component';
 
 @NgModule({
     declarations: [
@@ -28,7 +29,8 @@ import { DevelopersListComponent } from './developer/developers-list/developers-
         PlatformsListComponent,
         PaginationComponent,
         SinglePlatformComponent,
-        DevelopersListComponent
+        DevelopersListComponent,
+        SingleDeveloperComponent
     ],
   imports: [
     BrowserModule,

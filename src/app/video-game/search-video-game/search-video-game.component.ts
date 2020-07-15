@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { VideoGameService } from '../../services/video-game.service';
-import {ActivatedRoute} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-search-video-game',
@@ -13,7 +13,11 @@ export class SearchVideoGameComponent implements OnInit {
   public searchForm: FormGroup;
   public params: [] = [];
 
-  constructor(private formBuilder: FormBuilder, private videoGameService: VideoGameService, private route: ActivatedRoute) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private videoGameService: VideoGameService,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
     this.initForm();

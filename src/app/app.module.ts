@@ -16,6 +16,7 @@ import { PaginationComponent } from './pagination/pagination.component';
 import { SinglePlatformComponent } from './platform/single-platform/single-platform.component';
 import { DevelopersListComponent } from './developer/developers-list/developers-list.component';
 import { SingleDeveloperComponent } from './developer/single-developer/single-developer.component';
+import { SearchDeveloperComponent } from './developer/search-developer/search-developer.component';
 
 @NgModule({
     declarations: [
@@ -30,7 +31,8 @@ import { SingleDeveloperComponent } from './developer/single-developer/single-de
         PaginationComponent,
         SinglePlatformComponent,
         DevelopersListComponent,
-        SingleDeveloperComponent
+        SingleDeveloperComponent,
+        SearchDeveloperComponent
     ],
   imports: [
     BrowserModule,

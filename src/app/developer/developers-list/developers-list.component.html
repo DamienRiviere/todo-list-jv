@@ -7,6 +7,14 @@
   </h6>
 </div>
 
+<div class="container">
+  <div class="row">
+    <div class="col-12 bg-light py-4 rounded mt-4 border">
+      <app-search-developer></app-search-developer>
+    </div>
+  </div>
+</div>
+
 <div class="container mb-5" *ngIf="developers">
   <div class="row mt-4 d-flex justify-content-center">
     <div class="col-lg-3" *ngFor="let developer of developers; let i = index;">

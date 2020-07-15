@@ -31,7 +31,12 @@ export class PaginationComponent implements OnInit {
         this.videoGameService.getNextPage(next);
         break;
       case 'developers':
-        this.developerService.getNextPage(next);
+        // @ts-ignore
+        if (this.route.url.value.length > 1) {
+          this.videoGameService.getNextPage(next);
+        } else {
+          this.developerService.getNextPage(next);
+        }
         break;
     }
   }

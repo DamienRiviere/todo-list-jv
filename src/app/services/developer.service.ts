@@ -45,6 +45,25 @@ export class DeveloperService {
       );
   }
 
+  getNextPage(url: string): void {
+    this.httpClient
+      .get<any>(url)
+      .subscribe(
+        (response) => {
+          response.results.forEach((result) => {
+            // @ts-ignore
+            this.developers.results.push(result);
+          });
+          // @ts-ignore
+          this.developers.next = response.next;
+          this.emitDevelopers();
+        },
+        (error) => {
+          console.log(`Erreur : ${error}`);
+        }
+      );
+  }
+
   emitDevelopers(): void {
     this.developersSubject.next(this.developers);
   }

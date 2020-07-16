@@ -38,6 +38,8 @@ export class PaginationComponent implements OnInit {
           this.developerService.getNextPage(next);
         }
         break;
+      case 'platforms':
+        this.videoGameService.getNextPage(next);
     }
   }
 

@@ -31,9 +31,9 @@ export class PlatformService {
       );
   }
 
-  getSinglePlatform(slug: string): void {
+  getSinglePlatform(id: number): void {
     this.httpClient
-      .get<any>(`${this.urlApi}/${slug}`)
+      .get<any>(`${this.urlApi}/${id}`)
       .subscribe(
         (response) => {
           this.singlePlatform = response;
@@ -42,7 +42,7 @@ export class PlatformService {
         (error) => {
           console.log(`Erreur : ${error}`);
         }
-      )
+      );
   }
 
   emitPlatforms(): void {

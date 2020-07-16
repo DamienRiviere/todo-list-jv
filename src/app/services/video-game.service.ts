@@ -64,6 +64,25 @@ export class VideoGameService {
       );
   }
 
+  getVideoGamesByPlatform(platform: number): void {
+    this.httpClient
+      .get(`${this.baseUrl}?platforms=${platform}`)
+      .subscribe(
+        (response) => {
+          // @ts-ignore
+          this.videoGames = response;
+          // @ts-ignore
+          this.videoGames.count = response.count;
+          // @ts-ignore
+          this.videoGames.next = response.next;
+          this.emitVideoGames();
+        },
+        (error) => {
+          console.log(`Erreur : ${error}`);
+        }
+      );
+  }
+
   getVideoGamesByDeveloper(developer: string): void {
     this.httpClient
       .get<any>(`${this.baseUrl}?developers=${developer}`)
@@ -115,6 +134,9 @@ export class VideoGameService {
         // @ts-ignore
         return url = `${this.baseUrl}?developers=${params[1]}&search=`;
         break;
+      case 'platforms':
+        // @ts-ignore
+        return url = `${this.baseUrl}?platforms=${params[1]}&search=`;
     }
   }
 

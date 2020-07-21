@@ -1,11 +1,14 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top">
   <div class="container">
-    <a class="navbar-brand" href="#"><i class="fas fa-gamepad text-danger"></i><span class="text-white"> TodoListJv</span></a>
+    <a class="navbar-brand" href="#">
+      <i class="fas fa-gamepad text-danger"></i>
+      <span class="text-white"> TodoListJv</span>
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
+      <ul class="navbar-nav mr-auto">
         <li class="nav-item">
           <a class="nav-link text-white" routerLink="" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}">Accueil</a>
         </li>
@@ -17,6 +20,26 @@
         </li>
         <li class="nav-item">
           <a class="nav-link text-white" routerLink="developers" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}">Développeurs</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link text-white" routerLink="authentication/signin" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}" *ngIf="!isAuth">
+            <i class="fas fa-sign-in-alt text-danger"></i>
+            Se connecter
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" routerLink="authentication/signup" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}" *ngIf="!isAuth">
+            <i class="fas fa-user-plus text-danger"></i>
+            S'inscrire
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" *ngIf="isAuth" (click)="onSignOut()" style="cursor:pointer;">
+            <i class="fas fa-sign-out-alt text-danger"></i>
+            Déconnexion
+          </a>
         </li>
       </ul>
     </div>

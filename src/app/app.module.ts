@@ -17,6 +17,8 @@ import { SinglePlatformComponent } from './platform/single-platform/single-platf
 import { DevelopersListComponent } from './developer/developers-list/developers-list.component';
 import { SingleDeveloperComponent } from './developer/single-developer/single-developer.component';
 import { SearchDeveloperComponent } from './developer/search-developer/search-developer.component';
+import { SignupComponent } from './authentication/signup/signup.component';
+import { SigninComponent } from './authentication/signin/signin.component';
 
 @NgModule({
     declarations: [
@@ -32,7 +34,9 @@ import { SearchDeveloperComponent } from './developer/search-developer/search-de
         SinglePlatformComponent,
         DevelopersListComponent,
         SingleDeveloperComponent,
-        SearchDeveloperComponent
+        SearchDeveloperComponent,
+        SignupComponent,
+        SigninComponent
     ],
   imports: [
     BrowserModule,

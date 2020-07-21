@@ -6,9 +6,12 @@ import { PlatformsListComponent } from './platform/platforms-list/platforms-list
 import { SinglePlatformComponent } from './platform/single-platform/single-platform.component';
 import { DevelopersListComponent } from './developer/developers-list/developers-list.component';
 import { SingleDeveloperComponent } from './developer/single-developer/single-developer.component';
-
+import { SigninComponent } from './authentication/signin/signin.component';
+import { SignupComponent } from './authentication/signup/signup.component';
 
 const routes: Routes = [
+  { path: 'authentication/signin', component: SigninComponent },
+  { path: 'authentication/signup', component: SignupComponent },
   { path: 'video-games', component: VideoGamesListComponent },
   { path: 'video-games/:slug', component: SingleVideoGameComponent },
   { path: 'platforms', component: PlatformsListComponent },
@@ -17,7 +20,8 @@ const routes: Routes = [
   { path: 'developers', component: DevelopersListComponent },
   { path: 'developers/:slug', component: SingleDeveloperComponent },
   { path: 'developers/:slug/:videogame', component: SingleVideoGameComponent },
-  { path: '', redirectTo: 'video-games', pathMatch: 'full' }
+  { path: '', redirectTo: 'video-games', pathMatch: 'full' },
+  { path: '**', redirectTo: 'video-games' }
 ];
 
 @NgModule({

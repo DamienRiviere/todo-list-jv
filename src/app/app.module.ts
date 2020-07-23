@@ -19,6 +19,7 @@ import { SingleDeveloperComponent } from './developer/single-developer/single-de
 import { SearchDeveloperComponent } from './developer/search-developer/search-developer.component';
 import { SignupComponent } from './authentication/signup/signup.component';
 import { SigninComponent } from './authentication/signin/signin.component';
+import { ListComponent } from './profile/list/list.component';
 
 @NgModule({
     declarations: [
@@ -36,7 +37,8 @@ import { SigninComponent } from './authentication/signin/signin.component';
         SingleDeveloperComponent,
         SearchDeveloperComponent,
         SignupComponent,
-        SigninComponent
+        SigninComponent,
+        ListComponent
     ],
   imports: [
     BrowserModule,

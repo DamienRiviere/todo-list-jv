@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
+import { ListService } from '../../services/list.service';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-signup',
@@ -16,7 +18,8 @@ export class SignupComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private listService: ListService
   ) { }
 
   ngOnInit(): void {
@@ -36,6 +39,7 @@ export class SignupComponent implements OnInit {
 
     this.authService.createNewUser(email, password).then(
       () => {
+        this.listService.saveLists(firebase.auth().currentUser.uid);
         this.router.navigate(['/video-games']);
       },
       (error) => {

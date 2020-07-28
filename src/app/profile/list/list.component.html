@@ -1,1 +1,36 @@
-<p>list works!</p>
+<div class="container-fluid bg-light navbar-bottom py-4">
+  <h2 class="text-center mb-0">
+    Mes listes
+  </h2>
+  <h6 class="text-muted text-center">
+    Retrouvez toutes vos listes !
+  </h6>
+</div>
+
+<div class="container mb-3 mt-3">
+  <div *ngFor="let list of lists | keyvalue;">
+    <div class="border-bottom py-2">
+      <h4 class="mb-0" *ngIf="list.key === 'games-done'">Jeux terminer</h4>
+      <h4 class="mb-0" *ngIf="list.key === 'games-to-do'">Jeux à faire</h4>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-3" *ngFor="let videoGame of list.value | keyvalue;">
+        <div class="card-group my-4">
+          <div class="card" style="width: 18rem;">
+            <img src="{{ videoGame.value.background_image }}" class="card-img-top img-card" alt="Image de">
+            <div class="card-body pl-2 pr-2 text-center">
+              <h6 class="card-title font-weight-bold mb-0">
+                <a (click)="onSingleVideoGame(videoGame.value.slug)" style="cursor: pointer;" class="text-red">
+                  {{ videoGame.value.name }}
+                </a>
+              </h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-loader *ngIf="!lists"></app-loader>

@@ -1,31 +1,36 @@
 import { Injectable } from '@angular/core';
-import { List } from '../models/List';
 import * as firebase from 'firebase';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ListService {
 
-  public lists: List[] = [];
-  public listName: string[] = [
-    'Jeux à terminer', 'Jeux à faire'
-  ];
+  public lists: any[] = [];
+  public listsSubject = new Subject<any[]>();
 
   constructor() { }
 
-  saveLists(id: string) {
-    this.createListsForNewUser(id);
-    firebase.database().ref('/lists').set(this.lists);
+  getUserLists(id: string) {
+    firebase.database().ref('/lists/' + id)
+      .on('value', (data) => {
+        this.lists = data.val() ? data.val() : [];
+        this.emitLists();
+      });
   }
 
-  createListsForNewUser(id: string) {
-    for (let i = 0; i < this.listName.length; i++) {
-      const list = new List(
-        this.listName[i],
-        id
-      );
-      this.lists.push(list);
-    }
+  addNewGameInGamesToDoList(videoGame: object, id: string) {
+    // @ts-ignore
+    firebase.database().ref(`/lists/${id}/games-to-do`).child(videoGame.slug).set(videoGame);
+  }
+
+  addNewGameInGamesDoneList(videoGame: object, id: string) {
+    // @ts-ignore
+    firebase.database().ref(`/lists/${id}/games-done`).child(videoGame.slug).set(videoGame);
+  }
+
+  emitLists() {
+    this.listsSubject.next(this.lists);
   }
 }

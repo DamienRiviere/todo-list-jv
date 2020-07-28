@@ -8,6 +8,9 @@ import { DevelopersListComponent } from './developer/developers-list/developers-
 import { SingleDeveloperComponent } from './developer/single-developer/single-developer.component';
 import { SigninComponent } from './authentication/signin/signin.component';
 import { SignupComponent } from './authentication/signup/signup.component';
+import { AuthenticationGuardService } from './services/authentication-guard.service';
+import { UserComponent } from './profile/user/user.component';
+import {ListComponent} from './profile/list/list.component';
 
 const routes: Routes = [
   { path: 'authentication/signin', component: SigninComponent },
@@ -20,6 +23,9 @@ const routes: Routes = [
   { path: 'developers', component: DevelopersListComponent },
   { path: 'developers/:slug', component: SingleDeveloperComponent },
   { path: 'developers/:slug/:videogame', component: SingleVideoGameComponent },
+  { path: 'profile', canActivate: [AuthenticationGuardService], component: UserComponent },
+  { path: 'profile/lists', canActivate: [AuthenticationGuardService], component: ListComponent },
+  { path: 'profile/lists/:slug', canActivate: [AuthenticationGuardService], component: SingleVideoGameComponent },
   { path: '', redirectTo: 'video-games', pathMatch: 'full' },
   { path: '**', redirectTo: 'video-games' }
 ];

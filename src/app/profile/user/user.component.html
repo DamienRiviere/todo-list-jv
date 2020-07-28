@@ -1,0 +1,13 @@
+<div class="container-fluid bg-light navbar-bottom py-4" *ngIf="user">
+  <h2 class="text-center mb-0">
+    Mon profil
+  </h2>
+  <h6 class="text-muted text-center">
+    Retrouvez tous les paramètres de votre compte !
+  </h6>
+</div>
+
+<div class="container mb-5 mt-5">
+</div>
+
+<app-loader *ngIf="!user"></app-loader>

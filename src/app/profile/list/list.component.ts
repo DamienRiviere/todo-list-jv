@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { ListService } from '../../services/list.service';
+import * as firebase from 'firebase';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list',
@@ -7,9 +11,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListComponent implements OnInit {
 
-  constructor() { }
+  public lists: any[];
+  public listSubscription: Subscription;
+
+  constructor(private listService: ListService, private router: Router) { }
 
   ngOnInit(): void {
+    this.listSubscription = this.listService.listsSubject.subscribe(
+      (lists: any) => {
+        this.lists = lists;
+      }
+    );
+    this.listService.getUserLists(firebase.auth().currentUser.uid);
+  }
+
+  onSingleVideoGame(slug: string) {
+    this.router.navigate(['profile', 'lists', slug]);
   }
 
 }

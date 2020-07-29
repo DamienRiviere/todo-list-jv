@@ -29,4 +29,8 @@ export class ListComponent implements OnInit {
     this.router.navigate(['profile', 'lists', slug]);
   }
 
+  onDeleteVideoGame(list: object, videoGame: object) {
+    this.listService.removeVideoGame(firebase.auth().currentUser.uid, list, videoGame);
+  }
+
 }

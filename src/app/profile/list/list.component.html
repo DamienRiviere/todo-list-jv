@@ -7,7 +7,7 @@
   </h6>
 </div>
 
-<div class="container mb-3 mt-3">
+<div class="container mb-3 mt-3" *ngIf="lists">
   <div *ngFor="let list of lists | keyvalue;">
     <div class="border-bottom py-2">
       <h4 class="mb-0" *ngIf="list.key === 'games-done'">Jeux terminer</h4>
@@ -18,7 +18,10 @@
       <div class="col-lg-3" *ngFor="let videoGame of list.value | keyvalue;">
         <div class="card-group my-4">
           <div class="card" style="width: 18rem;">
-            <img src="{{ videoGame.value.background_image }}" class="card-img-top img-card" alt="Image de">
+            <a title="Supprimer le jeu de la liste" class="btn-delete" (click)="onDeleteVideoGame(list, videoGame)">
+              <i class="fas fa-times"></i>
+            </a>
+            <img src="{{ videoGame.value.background_image }}" class="card-img-top img-card" alt="Image de {{ videoGame.value.name }}">
             <div class="card-body pl-2 pr-2 text-center">
               <h6 class="card-title font-weight-bold mb-0">
                 <a (click)="onSingleVideoGame(videoGame.value.slug)" style="cursor: pointer;" class="text-red">
